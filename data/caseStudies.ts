@@ -59,7 +59,7 @@ export const caseStudies: CaseStudy[] = [
       author: 'CNE Staff',
       role: 'Childcare Network of Evanston',
     },
-    image: '/tapestri/images/cne/cne.png',
+    image: '/images/cne/cne.png',
     gradient: 'from-orange-500 to-amber-500',
   },
   {
