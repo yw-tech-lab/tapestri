@@ -46,7 +46,7 @@ export default function CaseStudies() {
 
                     {/* Right side - Visual */}
                     <div className="bg-gray-100 p-12 md:p-16 flex items-center justify-center">
-                        {study.image ? <img src={study.image} alt={study.title} className="w-[80%] h-full object-contain" /> : <div className="text-2xl">Image Goes Here</div>}
+                        {study.image ? <img src={study.image} alt={study.title} className="w-full h-full object-contain max-w-[350px]" /> : <div className="text-2xl">Image Goes Here</div>}
                     </div>
                   </div>
                 </div>
