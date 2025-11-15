@@ -61,14 +61,14 @@ const features = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-32 bg-white">
+    <section id="services" className="py-32 bg-background-default">
       <div className="container mx-auto px-6 max-w-6xl">
         <ScrollReveal direction="fade">
           <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-light mb-6 text-gray-900 tracking-tight">
+            <h2 className="text-5xl md:text-6xl font-light mb-6 text-text-primary tracking-tight">
               Our Services
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto font-light">
+            <p className="text-xl text-text-secondary max-w-2xl mx-auto font-light">
               Everything you need to create stunning digital experiences
             </p>
           </div>
@@ -78,11 +78,11 @@ export default function Services() {
           {features.map((feature, index) => (
             <ScrollReveal key={index} delay={index * 100} direction="up">
               <div className="group">
-                <div className="w-12 h-12 text-gray-900 mb-6 group-hover:text-gray-600 transition-colors duration-200">
+                <div className="w-12 h-12 text-text-primary mb-6 group-hover:text-text-secondary transition-colors duration-token-normal">
                   {feature.icon}
                 </div>
-                <h3 className="text-2xl font-light mb-3 text-gray-900">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed font-light">{feature.description}</p>
+                <h3 className="text-2xl font-light mb-3 text-text-primary">{feature.title}</h3>
+                <p className="text-text-secondary leading-relaxed font-light">{feature.description}</p>
               </div>
             </ScrollReveal>
           ))}

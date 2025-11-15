@@ -78,36 +78,36 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       </section>
 
       {/* Overview Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-background-default">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-12 mb-16">
               <div>
-                <h2 className="text-3xl font-bold mb-6 text-gray-900">The Challenge</h2>
-                <p className="text-gray-700 leading-relaxed text-lg">
+                <h2 className="text-3xl font-bold mb-6 text-text-primary">The Challenge</h2>
+                <p className="text-text-secondary leading-relaxed text-lg">
                   {caseStudy.detailedChallenge}
                 </p>
               </div>
               <div>
-                <h2 className="text-3xl font-bold mb-6 text-gray-900">Our Solution</h2>
-                <p className="text-gray-700 leading-relaxed text-lg">
+                <h2 className="text-3xl font-bold mb-6 text-text-primary">Our Solution</h2>
+                <p className="text-text-secondary leading-relaxed text-lg">
                   {caseStudy.detailedSolution}
                 </p>
               </div>
             </div>
 
             {/* Key Metrics */}
-            <div className="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 md:p-12 mb-16">
-              <h2 className="text-3xl font-bold mb-8 text-center text-gray-900">Key Results</h2>
+            <div className="bg-gradient-to-br from-background-secondary to-background-default rounded-3xl p-8 md:p-12 mb-16">
+              <h2 className="text-3xl font-bold mb-8 text-center text-text-primary">Key Results</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {caseStudy.results.map((result, index) => (
                   <div key={index} className="text-center">
                     <div className={`text-4xl md:text-5xl font-bold bg-gradient-to-br ${caseStudy.gradient} bg-clip-text text-transparent mb-2`}>
                       {result.metric}
                     </div>
-                    <div className="text-lg font-semibold text-gray-800 mb-1">{result.label}</div>
+                    <div className="text-lg font-semibold text-text-primary mb-1">{result.label}</div>
                     {result.description && (
-                      <div className="text-sm text-gray-600">{result.description}</div>
+                      <div className="text-sm text-text-secondary">{result.description}</div>
                     )}
                   </div>
                 ))}
@@ -118,13 +118,13 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       </section>
 
       {/* Approach Section */}
-      <section className="py-20 bg-gray-100">
+      <section className="py-20 bg-background-secondary">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold mb-12 text-center text-gray-900">Our Approach</h2>
+            <h2 className="text-4xl font-bold mb-12 text-center text-text-primary">Our Approach</h2>
             <ol className="space-y-2 list-decimal pl-8">
               {caseStudy.approach.map((step, index) => (
-                <li key={index} className="text-gray-700 text-lg leading-relaxed">{step}</li>
+                <li key={index} className="text-text-secondary text-lg leading-relaxed">{step}</li>
               ))}
             </ol>
           </div>
@@ -132,17 +132,17 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       </section>
 
       {/* Technologies & Timeline */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-background-default">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-12">
               <div>
-                <h2 className="text-3xl font-bold mb-6 text-gray-900">Technologies</h2>
+                <h2 className="text-3xl font-bold mb-6 text-text-primary">Technologies</h2>
                 <div className="flex flex-wrap gap-3">
                   {caseStudy.technologies.map((tech, index) => (
                     <span
                       key={index}
-                      className="px-4 py-0 bg-gray-100 text-gray-700 rounded-full font-medium hover:bg-gray-200 transition-colors duration-300"
+                      className="px-4 py-0 bg-background-tertiary text-text-secondary rounded-token-full font-medium hover:bg-primary-100 transition-colors duration-token-slow"
                     >
                       {tech}
                     </span>
@@ -150,9 +150,9 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                 </div>
               </div>
               <div>
-                <h2 className="text-3xl font-bold mb-6 text-gray-900">Timeline</h2>
-                <div className="text-2xl font-bold text-gray-800 mb-2">{caseStudy.timeline}</div>
-                <p className="text-gray-600">From initial consultation to launch</p>
+                <h2 className="text-3xl font-bold mb-6 text-text-primary">Timeline</h2>
+                <div className="text-2xl font-bold text-text-primary mb-2">{caseStudy.timeline}</div>
+                <p className="text-text-secondary">From initial consultation to launch</p>
               </div>
             </div>
           </div>
@@ -184,25 +184,25 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       )}
 
       {/* CTA Section */}
-      <section className="py-32 bg-white">
+      <section className="py-32 bg-background-default">
         <div className="container mx-auto px-6 max-w-2xl">
           <div className="text-center">
-            <h2 className="text-5xl md:text-6xl font-light mb-6 text-gray-900 tracking-tight">
+            <h2 className="text-5xl md:text-6xl font-light mb-6 text-text-primary tracking-tight">
               Ready to Transform Your Business?
             </h2>
-            <p className="text-xl text-gray-600 mb-12 font-light">
+            <p className="text-xl text-text-secondary mb-12 font-light">
               Let&apos;s discuss how we can help you achieve similar results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/#contact"
-                className="bg-gray-900 text-white px-8 py-3 rounded-full text-base font-medium hover:bg-gray-800 transition-colors duration-200"
+                className="bg-primary-900 text-text-inverse px-8 py-3 rounded-token-full text-base font-medium hover:bg-primary-800 transition-colors duration-token-normal"
               >
                 Get Started
               </Link>
               <Link
                 href="/#case-studies"
-                className="text-gray-900 px-8 py-3 rounded-full text-base font-medium hover:bg-gray-50 transition-colors duration-200"
+                className="text-text-primary px-8 py-3 rounded-token-full text-base font-medium hover:bg-background-secondary transition-colors duration-token-normal"
               >
                 View More Case Studies
               </Link>

@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node scripts/dev-with-watch.js",
+    "dev:next": "next dev",
+    "dev:watch": "node scripts/watch-tokens.js",
+    "build": "npm run sync-tokens && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sync-tokens": "node scripts/sync-tokens.js"
   },
   "dependencies": {
     "next": "14.0.4",

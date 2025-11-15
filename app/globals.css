@@ -2,9 +2,102 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Design Tokens - Auto-generated from design-tokens.json */
+/* DO NOT EDIT MANUALLY - Edit design-tokens.json and run: npm run sync-tokens */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Design Tokens - Auto-generated from design-tokens.json */
+  /* DO NOT EDIT MANUALLY - Edit design-tokens.json instead */
+
+  /* Colors - Primary */
+  --token-color-primary-50: #f9fafb;
+  --token-color-primary-100: #f3f4f6;
+  --token-color-primary-200: #e5e7eb;
+  --token-color-primary-300: #d1d5db;
+  --token-color-primary-400: #9ca3af;
+  --token-color-primary-500: #6b7280;
+  --token-color-primary-600: #4b5563;
+  --token-color-primary-700: #374151;
+  --token-color-primary-800: #1f2937;
+  --token-color-primary-900: #111827;
+  --token-color-primary-950: #030712;
+
+  /* Colors - Accent */
+  --token-color-accent-50: #fef2f2;
+  --token-color-accent-100: #fee2e2;
+  --token-color-accent-200: #fecaca;
+  --token-color-accent-300: #fca5a5;
+  --token-color-accent-400: #f87171;
+  --token-color-accent-500: #ef4444;
+  --token-color-accent-600: #dc2626;
+  --token-color-accent-700: #b91c1c;
+  --token-color-accent-800: #991b1b;
+  --token-color-accent-900: #7f1d1d;
+
+  /* Colors - Background */
+  --token-color-background-default: #ffffff;
+  --token-color-background-secondary: #f9fafb;
+  --token-color-background-tertiary: #f3f4f6;
+
+  /* Colors - Text */
+  --token-color-text-primary: #111827;
+  --token-color-text-secondary: #000000;
+  --token-color-text-tertiary: #6b7280;
+  --token-color-text-inverse: #ffffff;
+
+  /* Colors - Border */
+  --token-color-border-default: #e5e7eb;
+  --token-color-border-hover: #d1d5db;
+  --token-color-border-focus: #6b7280;
+
+  /* Legacy variables for compatibility */
+  --background: var(--token-color-background-default);
+  --foreground: var(--token-color-text-primary);
+
+  /* Spacing */
+  --token-spacing-xs: 0.25rem;
+  --token-spacing-sm: 0.5rem;
+  --token-spacing-md: 1rem;
+  --token-spacing-lg: 1.5rem;
+  --token-spacing-xl: 2rem;
+  --token-spacing-2xl: 3rem;
+  --token-spacing-3xl: 4rem;
+  --token-spacing-4xl: 6rem;
+
+  /* Typography - Font Sizes */
+  --token-typography-fontSize-xs: 0.75rem;
+  --token-typography-fontSize-sm: 0.875rem;
+  --token-typography-fontSize-base: 1rem;
+  --token-typography-fontSize-lg: 1.125rem;
+  --token-typography-fontSize-xl: 1.25rem;
+  --token-typography-fontSize-2xl: 1.5rem;
+  --token-typography-fontSize-3xl: 1.875rem;
+  --token-typography-fontSize-4xl: 2.25rem;
+  --token-typography-fontSize-5xl: 3rem;
+  --token-typography-fontSize-6xl: 3.75rem;
+  --token-typography-fontSize-7xl: 4.5rem;
+  --token-typography-fontSize-8xl: 6rem;
+
+  /* Typography - Font Weights */
+  --token-typography-fontWeight-light: 300;
+  --token-typography-fontWeight-normal: 400;
+  --token-typography-fontWeight-medium: 500;
+  --token-typography-fontWeight-semibold: 600;
+  --token-typography-fontWeight-bold: 700;
+
+  /* Border Radius */
+  --token-radius-none: 0;
+  --token-radius-sm: 0.125rem;
+  --token-radius-md: 0.375rem;
+  --token-radius-lg: 0.5rem;
+  --token-radius-xl: 0.75rem;
+  --token-radius-2xl: 1rem;
+  --token-radius-full: 9999px;
+
+  /* Transitions */
+  --token-transition-duration-fast: 150ms;
+  --token-transition-duration-normal: 200ms;
+  --token-transition-duration-slow: 300ms;
+
 }
 
 html {

@@ -9,8 +9,77 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
+        // Design tokens - mapped from CSS variables
+        primary: {
+          50: 'var(--token-color-primary-50)',
+          100: 'var(--token-color-primary-100)',
+          200: 'var(--token-color-primary-200)',
+          300: 'var(--token-color-primary-300)',
+          400: 'var(--token-color-primary-400)',
+          500: 'var(--token-color-primary-500)',
+          600: 'var(--token-color-primary-600)',
+          700: 'var(--token-color-primary-700)',
+          800: 'var(--token-color-primary-800)',
+          900: 'var(--token-color-primary-900)',
+          950: 'var(--token-color-primary-950)',
+        },
+        accent: {
+          50: 'var(--token-color-accent-50)',
+          100: 'var(--token-color-accent-100)',
+          200: 'var(--token-color-accent-200)',
+          300: 'var(--token-color-accent-300)',
+          400: 'var(--token-color-accent-400)',
+          500: 'var(--token-color-accent-500)',
+          600: 'var(--token-color-accent-600)',
+          700: 'var(--token-color-accent-700)',
+          800: 'var(--token-color-accent-800)',
+          900: 'var(--token-color-accent-900)',
+        },
+        background: {
+          DEFAULT: 'var(--token-color-background-default)',
+          secondary: 'var(--token-color-background-secondary)',
+          tertiary: 'var(--token-color-background-tertiary)',
+        },
+        text: {
+          primary: 'var(--token-color-text-primary)',
+          secondary: 'var(--token-color-text-secondary)',
+          tertiary: 'var(--token-color-text-tertiary)',
+          inverse: 'var(--token-color-text-inverse)',
+        },
+        border: {
+          DEFAULT: 'var(--token-color-border-default)',
+          hover: 'var(--token-color-border-hover)',
+          focus: 'var(--token-color-border-focus)',
+        },
+        // Legacy support
         foreground: 'var(--foreground)',
+      },
+      spacing: {
+        'token-xs': 'var(--token-spacing-xs)',
+        'token-sm': 'var(--token-spacing-sm)',
+        'token-md': 'var(--token-spacing-md)',
+        'token-lg': 'var(--token-spacing-lg)',
+        'token-xl': 'var(--token-spacing-xl)',
+        'token-2xl': 'var(--token-spacing-2xl)',
+        'token-3xl': 'var(--token-spacing-3xl)',
+        'token-4xl': 'var(--token-spacing-4xl)',
+      },
+      borderRadius: {
+        'token-none': 'var(--token-radius-none)',
+        'token-sm': 'var(--token-radius-sm)',
+        'token-md': 'var(--token-radius-md)',
+        'token-lg': 'var(--token-radius-lg)',
+        'token-xl': 'var(--token-radius-xl)',
+        'token-2xl': 'var(--token-radius-2xl)',
+        'token-full': 'var(--token-radius-full)',
+      },
+      transitionDuration: {
+        'token-fast': 'var(--token-transition-duration-fast)',
+        'token-normal': 'var(--token-transition-duration-normal)',
+        'token-slow': 'var(--token-transition-duration-slow)',
+        '400': '400ms',
+        '600': '600ms',
+        '800': '800ms',
       },
       animation: {
         'fade-in': 'fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -36,11 +105,6 @@ const config: Config = {
             'background-position': 'right center'
           },
         },
-      },
-      transitionDuration: {
-        '400': '400ms',
-        '600': '600ms',
-        '800': '800ms',
       },
       transitionTimingFunction: {
         'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
