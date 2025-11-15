@@ -1,0 +1,172 @@
+  Childcare Network of Evanston Case Study
+[Modified from Jen B.’s version]
+    
+    Project overview
+My Role
+Web Developer
+The Team
+6 Developers, 3 UX Designers, 1 UX Researcher, 1 Brand Designer, 1 Project Manager
+The product: Website redesign for the Childcare Network of Evanston's (CNE), a non-profit connecting
+young learners and their families with high-quality, equitable early childhood experiences and resources.
+Project duration:
+6 Months
+           
+   Project overview
+     The problem
+CNE wanted to refresh their online presence and improve the site’s information organization. Some specific needs included:
+1. Making the site easier to update and customize
+2. Improving navigation and usability
+3. Implementing accessibility features and a mobile-friendly, responsive design
+The goal
+The website redesign aimed to create a user-friendly, modern, and engaging site where users could easily find relevant resources. This included helping parents access quality, affordable early childhood education; and keeping the community up-to-date about CNE events and initiatives.
+CNE also wanted an easy, intuitive way to update content while maintaining a consistent look and feel.
+
+   Project overview
+    My role
+I developed key site features in collaboration with the design team. This involved:
+● Designing and implementing new tables and forms – as part of the team’s broader content management system design.
+● Creating visually engaging, responsive, data-driven Webflow templates
+Responsibilities
+● Designed and implemented data architecture for efficient content organization.
+● Ensured website is responsive across all devices.
+● Built dynamic templates and reusable components.
+● Used the Relume design system to ensure consistency and pixel-perfect implementation of designs.
+● Created and tested data collection forms while managing CMS data entry.
+
+   ● User research Research & Analysis ● Content analysis
+● Platform analysis
+  
+   Use of AI
+Designed and implemented a “Step-by-step” guide for new families to communicate the application process quickly and easily.
+● Fed existing website content into ChatGPT (based on Laura’s prompt engineering workshops)
+○ Added prompts and uploaded files to train the GPT on a knowledge base.
+○ Served as a design assistant to
+● Then could ask it to group the content to create summaries of services
+● Validate ChatGPT by:
+○ Looking up the source
+○ Asking one question at a time
+ 
+   Preliminary Research
+  Stakeholder analysis: Assessed existing website, identifying key stakeholders & their needs
+Information architecture: Devised a content organization strategy & sitemap Platform research: Researched content management systems and website
+builders; compiled a matrix of benefits, limitations, and tradeoffs
+Client feedback: Met with client periodically to validate our assumptions and get feedback on our recommendations.
+
+   Research: Stakeholder Analysis
+1234
+       Families & Caregivers
+Goals: exploring early childhood education options, including funded programs, local childcare providers, and eligibility criteria.
+Community Members & Donors
+Goals: browsing upcoming events and ways to support CNE; learning about CNE’s impact and accomplishments.
+Educators & Care Providers
+Goals: accessing CNE’s early childhood education materials; finding out about upcoming professional development workshops.
+CNE Staff
+Goals: Effectively reaching all community stakeholders; communicating their impact; and being able to post updates quickly and easily.
+     
+   Research: Content Analysis
+  User-centered navigation: Reorganized the sitemap in order to group content by stakeholder (e.g., “For Families,” “For Supporters”, “For Educators”)
+Card sort: Participated in a collaborative card sorting activity to group existing web pages by stakeholder
+Identified information gaps: Analyzed existing content to identify potential areas of confusion.
+Designed new introductory pages to help new families understand how to access services.
+ 
+   Research: Platform Analysis & Selection
+  Platform Price Simplicity Customization Capabilities
+  - Wix $29/mo
+-
+Very user-friendly, drag-and-drop editor. No coding required.
+Limited customization. Built-in tools are easy but can feel restrictive for advanced users.
+  - Squarespace $23/mo
+-
+Easy to use with a polished, intuitive interface.
+No coding needed.
+Limited customization through built-in templates, but more flexible than Wix.
+  - WordPress $25/mo
+-
+Editing interface a bit complicated
+No coding required
+Highly customizable. Thousands of themes, plugins, and full code access for custom development.
+  Webflow
+$23/mo
+- -
+Simple editing interface (much simpler than WordPress)
+No coding required
+Extremely customizable. Third-party plugins available. Offers extensive design control with HTML, CSS, and JavaScript integration. Integrated CMS.
+
+   Research: Platform Analysis & Selection
+  Decided on Webflow:
+● Customizable and modern
+● Great documentation and learning resources
+● Enabled us to use a design system
+● Supported database tables, forms, and data-driven templating
+● Easy to edit / maintain for content managers
+
+   Implementation research
+1
+Finding a platform
+Researched the various pros and cons of using Wix, SquareSpace, Webflow, and Wordpress.
+2
+Settling on Webflow
+Learned how to use Webflow, including how to leverage an existing CMS and how to use the widgets.
+      
+    Design
+● Mockups
+● High-fidelity prototype
+● Designing in Webflow
+ 
+   Digital Wireframes (Laura & Anita working on this)
+  Main mockup screen for display
+  Main mockup screen for display
+  Main mockup screen for display
+
+   High Fidelity Mockups (Laura & Anita working on this)
+  Main mockup screen for display
+  Main mockup screen for display
+  Main mockup screen for display
+
+    Implementation
+● Front-end development and UI
+● Database and CMS development
+ 
+  My Contribution [Sample #1]
+Designed and implemented a “Step-by-step” guide for new families to communicate the application process quickly and easily.
+● Researched appropriate Relume components
+● Imported and customized Relume timeline
+component into Webflow
+● Included links to relevant pages for new families to find more information
+● Integrated design system CSS classes
+   
+ My Contribution [Sample #2]
+Redesigned and reorganized the program partners page:
+● Migrated all program partners to a database table within the CMS.
+● Designed and implemented a data-driven Webflow template to feature CNE’s community partners more prominently.
+● Integrated design system components and CSS classes
+     
+   Accessibility considerations (still TODO)
+123
+         Insert one to two sentence summaries describing each accessibility consideration applied in your designs.
+Insert one to two sentence summaries describing each accessibility consideration applied in your designs.
+Insert one to two sentence summaries describing each accessibility consideration applied in your designs.
+
+    Going forward
+● Takeaways ● Next steps
+ 
+    Static Content
+Database Logo Upload
+    Dynamic Template
+ 
+   Takeaways
+     Impact:
+While user testing and evaluation is ongoing, the client is pleased with the look and feel of the website and the improved ability to edit it while maintaining visual consistency.
+They also appreciate the increased user-friendliness of the website, and its improved organization
+What I learned:
+Insert a few sentences summarizing what you learned throughout the project.
+
+   Next steps
+123
+         Insert a few sentences summarizing the next steps you would take with this project and why.
+Insert a few sentences summarizing the next steps you would take with this project and why.
+Insert a few sentences summarizing the next steps you would take with this project and why.
+
+   Let’s connect!
+   Insert a brief sentence or two about contacting you and/or reviewing more of your work.
+Provide your contact information here. This might include your email address, phone number, and website or link to other professional platforms.

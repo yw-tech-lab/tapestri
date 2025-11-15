@@ -21,44 +21,46 @@ export interface CaseStudy {
     author: string
     role: string
   }
-  image: string
+  image?: string
   gradient: string
 }
 
 export const caseStudies: CaseStudy[] = [
   {
     id: 1,
-    slug: 'ecommerce-platform-transformation',
-    title: 'E-Commerce Platform Transformation',
-    company: 'RetailTech Solutions',
-    industry: 'E-Commerce',
-    challenge: 'A legacy e-commerce platform struggling with slow load times and poor mobile experience, resulting in high bounce rates and lost sales.',
-    solution: 'We redesigned the entire platform with a modern tech stack, implementing server-side rendering, optimized images, and a mobile-first responsive design. The new architecture reduced load times by 75% and improved mobile conversion rates.',
-    detailedChallenge: 'RetailTech Solutions was facing a critical challenge with their decade-old e-commerce platform. The legacy system was built on outdated technology that couldn\'t handle modern traffic demands. Page load times averaged 8-12 seconds, mobile users experienced frequent crashes, and the checkout process had a 65% abandonment rate. The platform was losing an estimated $2M annually in potential revenue due to poor user experience.',
-    detailedSolution: 'Our team conducted a comprehensive audit and identified key bottlenecks in the architecture. We rebuilt the platform from the ground up using Next.js for server-side rendering, implemented a headless CMS for content management, and created a progressive web app (PWA) for mobile users. We optimized all images using next-gen formats, implemented lazy loading, and created a CDN strategy that reduced global load times. The new checkout flow was streamlined from 5 steps to 2, with one-click purchasing for returning customers.',
+    slug: 'childcare-network-evanston-redesign',
+    title: 'Website Redesign & CMS Implementation',
+    company: 'Childcare Network of Evanston',
+    industry: 'Non-Profit',
+    challenge: 'Website was difficult to update and customize, and lacked accessibility features and mobile-friendly responsive design. Staff found it difficult to maintain content consistency, and users - including families, caregivers, community members, educators, and donors - had difficulty finding relevant resources and information about programs, events, and services.',
+    solution: 'We redesigned the entire website using Webflow with a modern CMS architecture, implemented responsive design with accessibility features, and created user-centered navigation organized by stakeholder groups. The new site features data-driven templates, dynamic content management, and improved information architecture.',
+    detailedChallenge: 'The Childcare Network of Evanston (CNE), a non-profit connecting young learners and their families with high-quality, equitable early childhood experiences, needed to refresh their online presence. Their existing website was difficult to update and customize, had poor navigation and usability, and lacked accessibility features and mobile-friendly responsive design. Staff struggled to maintain content consistency, and users—including families, caregivers, community members, educators, and donors—had difficulty finding relevant resources and information about programs, events, and services.',
+    detailedSolution: 'We conducted comprehensive stakeholder analysis to understand the needs of families, caregivers, community members, educators, and CNE staff. Through content analysis and card sorting exercises, we reorganized the information architecture with user-centered navigation grouped by stakeholder (e.g., "For Families," "For Supporters," "For Educators"). We researched and selected Webflow as the platform for its customization capabilities, integrated CMS, and ease of use. We designed and implemented data-driven templates using the Relume design system, migrated content to database tables within the CMS, and created dynamic components including a step-by-step guide for new families. The new site features responsive design across all devices, improved accessibility, and an intuitive content management system that allows staff to update content easily while maintaining visual consistency.',
     approach: [
-      'Conducted comprehensive user research and analytics review',
-      'Performed technical audit and performance benchmarking',
-      'Designed new information architecture and user flows',
-      'Built MVP with core functionality in 8 weeks',
-      'Implemented A/B testing for checkout optimization',
-      'Launched progressive rollout with feature flags',
+      'Conducted stakeholder analysis to identify key user groups and their needs',
+      'Performed content analysis and card sorting to reorganize information architecture',
+      'Researched and evaluated CMS platforms (Wix, Squarespace, WordPress, Webflow)',
+      'Designed user-centered navigation organized by stakeholder groups',
+      'Created digital wireframes and high-fidelity mockups',
+      'Implemented data architecture and CMS database tables',
+      'Built responsive, data-driven Webflow templates using Relume design system',
+      'Developed dynamic components and reusable templates',
     ],
-    technologies: ['Next.js', 'React', 'TypeScript', 'Headless CMS', 'Stripe', 'AWS', 'Vercel'],
+    technologies: ['Webflow', 'Relume Design System', 'CMS', 'HTML', 'CSS', 'JavaScript'],
     timeline: '6 months',
     results: [
-      { metric: '75%', label: 'Faster Load Times', description: 'Average page load reduced from 8s to 2s' },
-      { metric: '3x', label: 'Mobile Conversions', description: 'Mobile conversion rate increased from 1.2% to 3.6%' },
-      { metric: '40%', label: 'Revenue Increase', description: 'Annual revenue increased by $2.8M' },
-      { metric: '65%', label: 'Checkout Completion', description: 'Checkout abandonment reduced from 65% to 23%' },
+      { metric: '100%', label: 'Mobile Responsive', description: 'Fully responsive design across all devices' },
+      { metric: 'Improved', label: 'Content Management', description: 'Intuitive CMS allows easy updates while maintaining consistency' },
+      { metric: 'Enhanced', label: 'User Experience', description: 'Improved navigation and information organization by stakeholder' },
+      { metric: 'Streamlined', label: 'Content Updates', description: 'Staff can now update content quickly and easily' },
     ],
     testimonial: {
-      quote: 'Tapestri Collective transformed our entire digital presence. The new platform not only looks amazing but performs flawlessly. Our customers love the experience, and our revenue has never been higher.',
-      author: 'Sarah Chen',
-      role: 'CEO, RetailTech Solutions',
+      quote: 'The new website has transformed how we connect with our community. We\'re thrilled with the look and feel, and the improved ability to edit content while maintaining visual consistency. The increased user-friendliness and better organization make it so much easier for families to find the resources they need.',
+      author: 'CNE Staff',
+      role: 'Childcare Network of Evanston',
     },
-    image: '🛒',
-    gradient: 'from-blue-500 to-cyan-500',
+    image: '/tapestri/images/cne/cne.png',
+    gradient: 'from-orange-500 to-amber-500',
   },
   {
     id: 2,
@@ -91,7 +93,6 @@ export const caseStudies: CaseStudy[] = [
       author: 'Michael Rodriguez',
       role: 'Product Director, DataFlow Analytics',
     },
-    image: '📊',
     gradient: 'from-purple-500 to-pink-500',
   },
   {
@@ -125,7 +126,6 @@ export const caseStudies: CaseStudy[] = [
       author: 'Dr. Emily Watson',
       role: 'Chief Medical Officer, MediCare Connect',
     },
-    image: '🏥',
     gradient: 'from-green-500 to-emerald-500',
   },
 ]

@@ -40,7 +40,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       <Header />
       
       {/* Hero Section */}
-      <section className={`relative pt-32 pb-20 bg-gradient-to-br ${caseStudy.gradient} overflow-hidden`}>
+      <section className={`relative pt-32 pb-20 py-20`}>
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-20 left-20 w-64 h-64 bg-white rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl"></div>
@@ -49,7 +49,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         <div className="container mx-auto px-4 relative z-10">
           <Link 
             href="/#case-studies" 
-            className="inline-flex items-center text-white/90 hover:text-white mb-8 transition-colors duration-300"
+            className="inline-flex items-center mb-8 transition-colors duration-300"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -58,22 +58,19 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           </Link>
           
           <div className="max-w-4xl">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-white/20 backdrop-blur-md text-white text-5xl mb-6">
-              {caseStudy.image}
-            </div>
             
             <div className="flex items-center gap-4 mb-6">
-              <span className="px-4 py-2 bg-white/20 backdrop-blur-md text-white text-sm font-medium rounded-full">
+              <span className="px-4 py-2 bg-white/20 backdrop-blur-mdtext-sm font-medium rounded-full">
                 {caseStudy.industry}
               </span>
-              <span className="text-white/80 font-semibold">{caseStudy.company}</span>
+              <span className=" font-semibold">{caseStudy.company}</span>
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
               {caseStudy.title}
             </h1>
             
-            <p className="text-xl text-white/90 max-w-3xl">
+            <p className="text-xl max-w-3xl">
               {caseStudy.challenge}
             </p>
           </div>
@@ -121,22 +118,15 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       </section>
 
       {/* Approach Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-20 bg-gray-100">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl font-bold mb-12 text-center text-gray-900">Our Approach</h2>
-            <div className="space-y-6">
+            <ol className="space-y-2 list-decimal pl-8">
               {caseStudy.approach.map((step, index) => (
-                <div key={index} className="flex gap-6">
-                  <div className={`flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br ${caseStudy.gradient} text-white flex items-center justify-center font-bold text-lg`}>
-                    {index + 1}
-                  </div>
-                  <div className="flex-1 pt-2">
-                    <p className="text-gray-700 text-lg leading-relaxed">{step}</p>
-                  </div>
-                </div>
+                <li key={index} className="text-gray-700 text-lg leading-relaxed">{step}</li>
               ))}
-            </div>
+            </ol>
           </div>
         </div>
       </section>
@@ -152,7 +142,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                   {caseStudy.technologies.map((tech, index) => (
                     <span
                       key={index}
-                      className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full font-medium hover:bg-gray-200 transition-colors duration-300"
+                      className="px-4 py-0 bg-gray-100 text-gray-700 rounded-full font-medium hover:bg-gray-200 transition-colors duration-300"
                     >
                       {tech}
                     </span>

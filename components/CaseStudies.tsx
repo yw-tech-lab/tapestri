@@ -42,25 +42,11 @@ export default function CaseStudies() {
                       <p className="text-gray-600 leading-relaxed mb-8 font-light">
                         {study.challenge}
                       </p>
-
-                      {/* Results */}
-                      <div className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-100">
-                        {study.results.slice(0, 3).map((result, resultIndex) => (
-                          <div key={resultIndex} className="text-left">
-                            <div className="text-3xl font-light text-gray-900 mb-1">
-                              {result.metric}
-                            </div>
-                            <div className="text-sm text-gray-600 font-light">{result.label}</div>
-                          </div>
-                        ))}
-                      </div>
                     </div>
 
                     {/* Right side - Visual */}
                     <div className="bg-gray-100 p-12 md:p-16 flex items-center justify-center">
-                      <div className="text-6xl opacity-20">
-                        {study.image}
-                      </div>
+                        {study.image ? <img src={study.image} alt={study.title} className="w-[80%] h-full object-contain" /> : <div className="text-2xl">Image Goes Here</div>}
                     </div>
                   </div>
                 </div>
