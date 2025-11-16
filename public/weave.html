@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tapestry Loom Animation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            background: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        canvas {
+            border: 1px solid #444;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // ---------- Globals (declare before use) ----------
+        let canvasW = 800;
+        let canvasH = 480;
+
+        let cols = 40;           // tapestry width in warp threads (columns)
+        let rows = 30;           // tapestry height in weft passes (rows)
+        let cellW, cellH;
+
+        let pattern = [];        // 2D array storing palette indices for each cell
+        let palette = [];        // <-- fill this inside setup()
+        let letterPattern = [];  // 2D array marking which cells are part of letters
+
+        let currentRow = 0;      // declared up top so all functions can use it
+        let shuttleX = 0;
+        let shuttleDir = 1;      // 1 = moving right, -1 = moving left
+        let shuttleSpeed = 10;
+        let shuttleYoffset = 30; // visual offset from top for shuttle
+
+        function setup() {
+            createCanvas(canvasW, canvasH);
+            pixelDensity(1);
+            frameRate(60);
+
+            // compute cell size
+            cellW = width / cols;
+            cellH = (height - 100) / rows; // leave some room for loom hardware top/bottom
+
+            // Build palette using p5.color() inside setup()
+            palette = [
+                color('#e63946'),
+                color('#f1faee'),
+                color('#a8dadc'),
+                color('#457b9d'),
+                color('#2a9d8f'),
+                color('#f4a261'),
+                color('#e9c46a')
+            ];
+
+            // Create letter pattern for "Tapestri"
+            letterPattern = createLetterPattern('Tapestri', cols, rows);
+
+            // Create a smooth color transition pattern
+            // Colors change every 5 stitches with smooth transitions
+            const stitchesPerColor = 8;
+            for (let r = 0; r < rows; r++) {
+                pattern[r] = [];
+                for (let c = 0; c < cols; c++) {
+                    // Calculate which stitch number this is (across all rows)
+                    let stitchNumber = r * cols + c;
+
+                    // Calculate which color group this stitch belongs to (every 5 stitches)
+                    let colorGroup = floor(stitchNumber / stitchesPerColor);
+
+                    // Calculate progress within the current color group (0 to 1)
+                    let progressInGroup = (stitchNumber % stitchesPerColor) / stitchesPerColor;
+
+                    // Map to palette: each group transitions between two adjacent colors
+                    // Use modulo to cycle through palette colors
+                    let colorIndex1 = colorGroup % palette.length;
+                    let colorIndex2 = (colorGroup + 1) % palette.length;
+
+                    // Store both color indices and progress for interpolation
+                    // We'll store a value that represents: colorIndex1 + progressInGroup
+                    let progress = colorIndex1 + progressInGroup;
+
+                    // Store the progress value (we'll use it to interpolate colors)
+                    pattern[r][c] = progress;
+                }
+            }
+
+            // Start shuttle on left
+            shuttleX = -40;
+            shuttleDir = 1;
+        }
+
+        // Create a letter pattern bitmap
+        function createLetterPattern(text, gridCols, gridRows) {
+            let pattern = [];
+            for (let r = 0; r < gridRows; r++) {
+                pattern[r] = [];
+                for (let c = 0; c < gridCols; c++) {
+                    pattern[r][c] = false;
+                }
+            }
+
+            // Define simple 5x7 pixel fonts
+            let fonts = {
+                'T': [
+                    [1, 1, 1, 1, 1],
+                    [0, 1, 1, 1, 0],
+                    [0, 0, 1, 0, 0],
+                    [0, 0, 1, 0, 0],
+                    [0, 0, 1, 0, 0],
+                    [0, 0, 1, 0, 0],
+                    [0, 0, 1, 0, 0]
+                ],
+                'A': [
+                    [0, 1, 1, 1, 0],
+                    [1, 0, 0, 0, 1],
+                    [1, 0, 0, 0, 1],
+                    [1, 1, 1, 1, 1],
+                    [1, 0, 0, 0, 1],
+                    [1, 0, 0, 0, 1],
+                    [1, 0, 0, 0, 1]
+                ],
+                'P': [
+                    [1, 1, 1, 1, 0],
+                    [1, 0, 0, 0, 1],
+                    [1, 0, 0, 0, 1],
+                    [1, 1, 1, 1, 0],
+                    [1, 0, 0, 0, 0],
+                    [1, 0, 0, 0, 0],
+                    [1, 0, 0, 0, 0]
+                ],
+                'E': [
+                    [1, 1, 1, 1, 1],
+                    [1, 0, 0, 0, 0],
+                    [1, 0, 0, 0, 0],
+                    [1, 1, 1, 1, 0],
+                    [1, 0, 0, 0, 0],
+                    [1, 0, 0, 0, 0],
+                    [1, 1, 1, 1, 1]
+                ],
+                'S': [
+                    [0, 1, 1, 1, 1],
+                    [1, 0, 0, 0, 0],
+                    [1, 0, 0, 0, 0],
+                    [0, 1, 1, 1, 0],
+                    [0, 0, 0, 0, 1],
+                    [0, 0, 0, 0, 1],
+                    [1, 1, 1, 1, 0]
+                ],
+                'R': [
+                    [1, 1, 1, 1, 0],
+                    [1, 0, 0, 0, 1],
+                    [1, 0, 0, 0, 1],
+                    [1, 1, 1, 1, 0],
+                    [1, 0, 1, 0, 0],
+                    [1, 0, 0, 1, 0],
+                    [1, 0, 0, 0, 1]
+                ],
+                'I': [
+                    [1, 1, 1],
+                    [0, 1, 0],
+                    [0, 1, 0],
+                    [0, 1, 0],
+                    [0, 1, 0],
+                    [0, 1, 0],
+                    [1, 1, 1]
+                ]
+            };
+
+            let letterHeight = 7;
+            let letterSpacing = 1;
+            let letterWidth = 5;
+            let iWidth = 3; // I is narrower
+
+            // Calculate total width
+            let totalWidth = 0;
+            for (let i = 0; i < text.length; i++) {
+                let char = text[i].toUpperCase();
+                if (char === 'I') {
+                    totalWidth += iWidth;
+                } else {
+                    totalWidth += letterWidth;
+                }
+                if (i < text.length - 1) {
+                    totalWidth += letterSpacing;
+                }
+            }
+
+            let startRow = floor((gridRows - letterHeight) / 2);
+            let startCol = floor((gridCols - totalWidth) / 2);
+            let currentCol = startCol;
+
+            // Draw each letter
+            for (let i = 0; i < text.length; i++) {
+                let char = text[i].toUpperCase();
+                let charPattern = fonts[char];
+
+                if (charPattern) {
+                    let charWidth = char === 'I' ? iWidth : letterWidth;
+
+                    for (let r = 0; r < letterHeight; r++) {
+                        for (let c = 0; c < charWidth; c++) {
+                            if (charPattern[r][c] === 1) {
+                                let gridR = startRow + r;
+                                let gridC = currentCol + c;
+                                if (gridR >= 0 && gridR < gridRows && gridC >= 0 && gridC < gridCols) {
+                                    pattern[gridR][gridC] = true;
+                                }
+                            }
+                        }
+                    }
+
+                    currentCol += charWidth + letterSpacing;
+                }
+            }
+
+            return pattern;
+        }
+
+        function draw() {
+            background(30);
+
+            drawLoomFrame();
+
+            // draw warp segments that are meant to be *under* (where weft will be on top)
+            drawWarpSegments('under');
+
+            // draw the woven fabric (completed rows + partial current row)
+            drawWovenFabric();
+
+            // Draw shuttle (will appear under warp "over" threads)
+            drawShuttle();
+
+            // Draw yarn spool (will appear under warp "over" threads)
+            drawYarnSpool();
+
+            // draw warp segments that are meant to be *over* (covering some weft stitches)
+            // These are drawn last so they appear on top of both shuttle and yarn spool
+            drawWarpSegments('over');
+
+            animateShuttleAndAdvanceRow();
+        }
+
+        /* ---------- Drawing helpers ---------- */
+
+        function drawLoomFrame() {
+            // simple stylized frame
+            noStroke();
+            fill(70);
+            rect(0, 0, width, 40); // top beam
+            rect(0, height - 40, width, 40); // bottom beam
+            // decorative rails
+            stroke(110);
+            for (let i = 0; i < 6; i++) {
+                line(20 + i * 120, 8, 20 + i * 120, 32);
+            }
+        }
+
+        // Draw warp as short vertical segments per cell, in two modes:
+        // mode === 'under' -> draw segments where warp should be under the weft
+        // mode === 'over'  -> draw segments where warp should be over the weft
+        function drawWarpSegments(mode) {
+            const top = 40;
+            strokeWeight(2);
+
+            // Calculate shuttle position for dynamic warp drawing
+            let visibleRow = min(currentRow, rows - 1);
+            let shuttleCol = floor(shuttleX / cellW);
+            shuttleCol = constrain(shuttleCol, 0, cols - 1);
+            const shuttleY = 40 + visibleRow * cellH + cellH / 2;
+
+            for (let c = 0; c < cols; c++) {
+                // x center for this warp column
+                let xCenter = c * cellW + cellW / 2;
+                // subtle wiggle that is column dependent
+                let wiggle = sin((frameCount * 0.02) + c * 0.2) * 0.6;
+
+                for (let r = 0; r < rows; r++) {
+                    // decide whether warp is "over" on this cell (classic checkerboard)
+                    // you can invert parity if you'd prefer the other starting state
+                    let warpOver = ((r + c) % 2 === 0);
+
+                    if ((mode === 'over' && warpOver) || (mode === 'under' && !warpOver)) {
+                        let segTop, segBottom;
+
+                        // If drawing "over" mode in the current row and column where shuttle is,
+                        // draw the warp thread extending through the entire cell (it will appear above shuttle due to z-order)
+                        if (mode === 'over' && r === visibleRow && c === shuttleCol && currentRow < rows) {
+                            // Draw warp thread extending through the entire cell
+                            segTop = top + r * cellH + cellH * 0.12; // Start at normal top
+                            segBottom = top + (r + 1) * cellH - cellH * 0.12; // End at normal bottom
+                        } else {
+                            // Normal drawing: draw a short vertical segment that fits inside the cell
+                            segTop = top + r * cellH + cellH * 0.12;
+                            segBottom = top + (r + 1) * cellH - cellH * 0.12;
+                        }
+
+                        // slightly thicker where warp is "over"
+                        stroke(240);
+                        strokeWeight(mode === 'over' ? 3 : 1.5);
+
+                        // draw as a short line so we get the alternating visible effect
+                        line(xCenter + wiggle, segTop, xCenter + wiggle, segBottom);
+                    }
+                }
+            }
+        }
+
+        // Draw a puffed yarn-like stitch
+        function drawYarnStitch(x, y, w, h, stitchColor, useRounding) {
+            push();
+            translate(x + w / 2, y + h / 2);
+            noStroke();
+            fill(stitchColor);
+
+            // Draw multiple overlapping rectangles to create a puffed yarn texture
+            rectMode(CENTER);
+
+            // Use rounding based on parameter (every other stitch has no rounding)
+            let rounding = useRounding ? 2 : 0;
+            let sideRounding = useRounding ? 1.5 : 0;
+            let smallRounding = useRounding ? 1 : 0;
+
+            // Main body - rounded or sharp rectangle
+            rect(0, 0, w * 0.95, h * 1.3, rounding);
+
+            // Add some puffed sections for texture
+            rect(-w * 0.2, 0, w * 0.4, h * 1.1, sideRounding);
+            rect(w * 0.2, 0, w * 0.4, h * 1.1, sideRounding);
+            rect(0, -h * 0.2, w * 0.6, h * 0.5, smallRounding);
+            rect(0, h * 0.2, w * 0.6, h * 0.5, smallRounding);
+
+            pop();
+        }
+
+        function drawWovenFabric() {
+            const top = 40;
+            noStroke();
+
+            // Draw all completed rows (< currentRow)
+            for (let r = 0; r < currentRow; r++) {
+                for (let c = 0; c < cols; c++) {
+                    let px = c * cellW;
+                    let py = top + r * cellH;
+                    let progress = pattern[r][c];
+
+                    // Check if this cell is part of a letter pattern
+                    let stitchColor;
+                    if (letterPattern && letterPattern[r] && letterPattern[r][c]) {
+                        // Use bright white for letters
+                        stitchColor = color('#ffffff');
+                    } else {
+                        // Interpolate between colors in the palette
+                        let colorIndex = floor(progress);
+                        let t = progress - colorIndex; // fractional part (0 to 1)
+
+                        // Use modulo to wrap around the palette
+                        let colorIndex1 = colorIndex % palette.length;
+                        let colorIndex2 = (colorIndex + 1) % palette.length;
+
+                        // Lerp between current and next color (wraps from last to first)
+                        let color1 = palette[colorIndex1];
+                        let color2 = palette[colorIndex2];
+                        stitchColor = lerpColor(color1, color2, t);
+                    }
+
+                    // Draw puffed yarn stitch - every other stitch has no rounding
+                    let useRounding = (c % 2 === 1); // Odd columns have rounding, even columns don't
+                    // Make every other stitch (no rounding) 1 pixel wider to eliminate border illusion
+                    let stitchW = useRounding ? (cellW + 1) : (cellW + 2);
+                    let stitchH = useRounding ? (cellH + 1) : (cellH + 2);
+                    drawYarnStitch(px, py, stitchW, stitchH, stitchColor, useRounding);
+                }
+            }
+
+            // Draw current weaving row partially as shuttle moves across
+            if (currentRow < rows) {
+                const r = currentRow;
+
+                // Determine shuttle's trailing edge (the back of the shuttle)
+                // shuttle body width ~36 from drawShuttle(); use 18 as half-width
+                const shuttleHalfWidth = 18;
+                // Trailing edge is opposite the direction of movement
+                const shuttleTrailingX = shuttleX - shuttleDir * shuttleHalfWidth;
+
+                for (let c = 0; c < cols; c++) {
+                    let colCenterX = c * cellW + cellW / 2;
+
+                    // Reveal column only after the shuttle's trailing edge has passed the column center
+                    // This ensures the stitch appears only after the shuttle has completely passed through
+                    let reveal = shuttleDir === 1
+                        ? (colCenterX <= shuttleTrailingX)
+                        : (colCenterX >= shuttleTrailingX);
+
+                    let px = c * cellW;
+                    let py = top + r * cellH;
+                    let progress = pattern[r][c];
+
+                    if (reveal) {
+                        // Check if this cell is part of a letter pattern
+                        let stitchColor;
+                        if (letterPattern && letterPattern[r] && letterPattern[r][c]) {
+                            // Use bright white for letters
+                            stitchColor = color('#ffffff');
+                        } else {
+                            // Interpolate between colors in the palette
+                            let colorIndex = floor(progress);
+                            let t = progress - colorIndex; // fractional part (0 to 1)
+
+                            // Use modulo to wrap around the palette
+                            let colorIndex1 = colorIndex % palette.length;
+                            let colorIndex2 = (colorIndex + 1) % palette.length;
+
+                            // Lerp between current and next color (wraps from last to first)
+                            let color1 = palette[colorIndex1];
+                            let color2 = palette[colorIndex2];
+                            stitchColor = lerpColor(color1, color2, t);
+                        }
+
+                        // Draw puffed yarn stitch - every other stitch has no rounding
+                        let useRounding = (c % 2 === 1); // Odd columns have rounding, even columns don't
+                        // Make every other stitch (no rounding) 1 pixel wider to eliminate border illusion
+                        let stitchW = useRounding ? (cellW + 1) : (cellW + 2);
+                        let stitchH = useRounding ? (cellH + 1) : (cellH + 2);
+                        drawYarnStitch(px, py, stitchW, stitchH, stitchColor, useRounding);
+                    } else {
+                        // draw a faint yarn shadow to indicate where weaving will appear
+                        fill(50, 30);
+                        rect(px, py, cellW + 1, cellH + 1);
+                    }
+                }
+            }
+        }
+
+        function drawShuttle() {
+            // clamp currentRow so shuttle Y stays in bounds when currentRow grows beyond rows
+            let visibleRow = min(currentRow, rows - 1);
+            // Align shuttle with the center of the weft thread
+            const shuttleY = 40 + visibleRow * cellH + cellH / 2;
+
+            // Calculate which column the shuttle is over
+            let currentCol = floor(shuttleX / cellW);
+            currentCol = constrain(currentCol, 0, cols - 1);
+
+            // Determine if warp is "over" at this position (same logic as drawWarpSegments)
+            let warpOver = ((visibleRow + currentCol) % 2 === 0);
+
+            // Angle the shuttle: tilt up when going over warp, down when going under
+            const angle = warpOver ? 10 : -10; // 10 degrees up when over, 10 degrees down when under
+
+            push();
+            translate(shuttleX, shuttleY);
+            rotate(radians(angle));
+            // shuttle body
+            noStroke();
+            fill(200);
+            rect(-18, -8, 36, 16, 4);
+            pop();
+        }
+
+        function drawYarnSpool() {
+            // clamp currentRow so spool Y stays in bounds when currentRow grows beyond rows
+            let visibleRow = min(currentRow, rows - 1);
+            // Align spool with the center of the weft thread (same as shuttle)
+            const spoolY = 40 + visibleRow * cellH + cellH / 2;
+
+            // Calculate which column the shuttle is over (same as drawShuttle)
+            let currentCol = floor(shuttleX / cellW);
+            currentCol = constrain(currentCol, 0, cols - 1);
+
+            // Determine if warp is "over" at this position (same logic as drawShuttle)
+            let warpOver = ((visibleRow + currentCol) % 2 === 0);
+
+            // Angle the spool to match the shuttle: tilt up when going over warp, down when going under
+            const angle = warpOver ? 10 : -10; // 10 degrees up when over, 10 degrees down when under
+
+            push();
+            translate(shuttleX, spoolY);
+            rotate(radians(angle));
+            // yarn spool
+            noStroke();
+            fill(80);
+            ellipse(0, 0, 18, 12);
+            pop();
+        }
+
+        function animateShuttleAndAdvanceRow() {
+            // move shuttle
+            shuttleX += shuttleSpeed * shuttleDir;
+
+            // Detect when shuttle exits right edge (finish left->right pass)
+            if (shuttleDir === 1 && shuttleX > width + 40) {
+                shuttleDir = -1;
+                // only increment currentRow when a full pass is completed
+                if (currentRow < rows) currentRow++;
+                // place shuttle just outside so next frame moves inward
+                shuttleX = width + 40;
+            }
+
+            // Detect left edge (finish right->left pass)
+            if (shuttleDir === -1 && shuttleX < -40) {
+                shuttleDir = 1;
+                if (currentRow < rows) currentRow++;
+                shuttleX = -40;
+            }
+
+            // Stop animation at the end (optional)
+            if (currentRow >= rows) {
+                // slow down and stop shuttle gracefully
+                shuttleSpeed = max(0, shuttleSpeed - 0.04);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
