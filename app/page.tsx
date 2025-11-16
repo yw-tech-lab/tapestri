@@ -5,10 +5,12 @@ import CaseStudies from '@/components/CaseStudies'
 import About from '@/components/About'
 import Footer from '@/components/Footer'
 import ScrollProgress from '@/components/ScrollProgress'
+import ScrollingGeometrics from '@/components/ScrollingGeometrics'
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-visible">
+    <main className="min-h-screen overflow-visible relative">
+      <ScrollingGeometrics />
       <ScrollProgress />
       <Header />
       <Hero />
