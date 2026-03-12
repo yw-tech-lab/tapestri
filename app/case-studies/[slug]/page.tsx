@@ -35,153 +35,120 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
   }
 
   return (
-    <main className="min-h-screen overflow-visible">
+    <main className="min-h-screen bg-background-default">
       <ScrollProgress />
       <Header />
-      
-      {/* Hero Section */}
-      <section className={`relative pt-32 pb-20 py-20`}>
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-20 w-64 h-64 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <Link 
-            href="/#case-studies" 
-            className="inline-flex items-center mb-8 transition-colors duration-300"
+
+      {/* Main content */}
+      <section className="pt-32 pb-32">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <Link
+            href="/#case-studies"
+            className="inline-flex items-center text-sm text-text-tertiary hover:text-text-primary transition-colors duration-token-normal mb-8"
           >
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
             </svg>
-            Back to Case Studies
+            Back to case studies
           </Link>
-          
-          <div className="max-w-4xl">
-            
-            <div className="flex items-center gap-4 mb-6">
-              <span className="px-4 py-2 bg-white/20 backdrop-blur-mdtext-sm font-medium rounded-full">
-                {caseStudy.industry}
-              </span>
-              <span className=" font-semibold">{caseStudy.company}</span>
-            </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
-              {caseStudy.title}
-            </h1>
-            
-            <p className="text-xl max-w-3xl">
-              {caseStudy.challenge}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Overview Section */}
-      <section className="py-20 bg-background-default">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 mb-16">
+          <div className="space-y-20">
+            {/* Hero */}
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,2.2fr)_minmax(0,1.3fr)] gap-16 items-start">
               <div>
-                <h2 className="text-3xl font-bold mb-6 text-text-primary">The Challenge</h2>
-                <p className="text-text-secondary leading-relaxed text-lg">
-                  {caseStudy.detailedChallenge}
+                <p className="text-sm uppercase tracking-[0.2em] text-text-tertiary mb-4">
+                  Case study · {caseStudy.industry}
+                </p>
+                <h1 className="text-5xl md:text-6xl font-light mb-4 text-text-primary tracking-tight">
+                  {caseStudy.company}
+                </h1>
+                <p className="text-2xl font-light text-text-primary mb-6">
+                  {caseStudy.title}
+                </p>
+                <p className="text-xl text-text-secondary max-w-3xl font-light">
+                  {caseStudy.summary}
                 </p>
               </div>
-              <div>
-                <h2 className="text-3xl font-bold mb-6 text-text-primary">Our Solution</h2>
-                <p className="text-text-secondary leading-relaxed text-lg">
-                  {caseStudy.detailedSolution}
-                </p>
-              </div>
-            </div>
 
-            {/* Key Metrics */}
-            <div className="bg-gradient-to-br from-background-secondary to-background-default rounded-3xl p-8 md:p-12 mb-16">
-              <h2 className="text-3xl font-bold mb-8 text-center text-text-primary">Key Results</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {caseStudy.results.map((result, index) => (
-                  <div key={index} className="text-center">
-                    <div className={`text-4xl md:text-5xl font-bold bg-gradient-to-br ${caseStudy.gradient} bg-clip-text text-transparent mb-2`}>
-                      {result.metric}
+              <div className="space-y-6">
+                <div className="border border-border-default rounded-token-xl px-6 py-5 bg-background-secondary/70">
+                  <h2 className="text-sm uppercase tracking-[0.16em] text-text-tertiary mb-3">
+                    At a glance
+                  </h2>
+                  <dl className="space-y-2 text-sm text-text-secondary">
+                    <div className="flex justify-between gap-4">
+                      <dt className="text-text-tertiary">Industry</dt>
+                      <dd className="text-text-primary">{caseStudy.industry}</dd>
                     </div>
-                    <div className="text-lg font-semibold text-text-primary mb-1">{result.label}</div>
-                    {result.description && (
-                      <div className="text-sm text-text-secondary">{result.description}</div>
+                    {caseStudy.timeline && (
+                      <div className="flex justify-between gap-4">
+                        <dt className="text-text-tertiary">Timeline</dt>
+                        <dd className="text-text-primary">{caseStudy.timeline}</dd>
+                      </div>
                     )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Approach Section */}
-      <section className="py-20 bg-background-secondary">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold mb-12 text-center text-text-primary">Our Approach</h2>
-            <ol className="space-y-2 list-decimal pl-8">
-              {caseStudy.approach.map((step, index) => (
-                <li key={index} className="text-text-secondary text-lg leading-relaxed">{step}</li>
-              ))}
-            </ol>
-          </div>
-        </div>
-      </section>
-
-      {/* Technologies & Timeline */}
-      <section className="py-20 bg-background-default">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12">
-              <div>
-                <h2 className="text-3xl font-bold mb-6 text-text-primary">Technologies</h2>
-                <div className="flex flex-wrap gap-3">
-                  {caseStudy.technologies.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-4 py-0 bg-background-tertiary text-text-secondary rounded-token-full font-medium hover:bg-primary-100 transition-colors duration-token-slow"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                    {caseStudy.platforms.length > 0 && (
+                      <div className="flex justify-between gap-4">
+                        <dt className="text-text-tertiary">Platform</dt>
+                        <dd className="text-text-primary">
+                          {caseStudy.platforms.join(', ')}
+                        </dd>
+                      </div>
+                    )}
+                  </dl>
                 </div>
+
+                {caseStudy.services.length > 0 && (
+                  <div>
+                    <h2 className="text-sm uppercase tracking-[0.16em] text-text-tertiary mb-3">
+                      Services
+                    </h2>
+                    <div className="flex flex-wrap gap-2">
+                      {caseStudy.services.map((service, index) => (
+                        <span
+                          key={index}
+                          className="px-4 py-1 bg-background-secondary text-text-secondary rounded-token-full text-sm"
+                        >
+                          {service}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Challenge & Solution */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+              <div>
+                <h2 className="text-3xl font-light mb-4 text-text-primary">The challenge</h2>
+                <p className="text-lg text-text-secondary leading-relaxed font-light">
+                  {caseStudy.challenge}
+                </p>
               </div>
               <div>
-                <h2 className="text-3xl font-bold mb-6 text-text-primary">Timeline</h2>
-                <div className="text-2xl font-bold text-text-primary mb-2">{caseStudy.timeline}</div>
-                <p className="text-text-secondary">From initial consultation to launch</p>
+                <h2 className="text-3xl font-light mb-4 text-text-primary">Our approach</h2>
+                <p className="text-lg text-text-secondary leading-relaxed font-light">
+                  {caseStudy.solution}
+                </p>
+              </div>
+            </div>
+
+            {/* Outcomes */}
+            <div>
+              <div className="border border-border-default rounded-token-2xl px-8 py-10 bg-background-secondary/60">
+                <h2 className="text-3xl font-light mb-6 text-text-primary">
+                  Outcomes
+                </h2>
+                <ul className="list-disc list-outside pl-6 space-y-2 text-lg text-text-secondary leading-relaxed font-light">
+                  {caseStudy.outcomes.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Testimonial */}
-      {caseStudy.testimonial && (
-        <section className={`py-20 bg-gradient-to-br ${caseStudy.gradient} relative overflow-hidden`}>
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-20 right-20 w-64 h-64 bg-white rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 left-20 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-          </div>
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-3xl mx-auto text-center">
-              <svg className="w-12 h-12 text-white/50 mb-6 mx-auto" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
-              <blockquote className="text-2xl md:text-3xl font-medium text-white mb-8 leading-relaxed">
-                {caseStudy.testimonial.quote}
-              </blockquote>
-              <div className="text-white/90">
-                <div className="font-semibold text-lg">{caseStudy.testimonial.author}</div>
-                <div className="text-white/80">{caseStudy.testimonial.role}</div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* CTA Section */}
       <section className="py-32 bg-background-default">

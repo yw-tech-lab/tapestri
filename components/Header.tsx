@@ -1,10 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
+  const isHome = pathname === '/'
+  const anchorPrefix = isHome ? '' : '/'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,16 +34,16 @@ export default function Header() {
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-10">
-            <a href="#services" className="text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal">
+            <a href={`${anchorPrefix}#services`} className="text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal">
               Services
             </a>
-            <a href="#case-studies" className="text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal">
+            <a href={`${anchorPrefix}#case-studies`} className="text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal">
               Case Studies
             </a>
-            <a href="#about" className="text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal">
+            <a href={`${anchorPrefix}#about`} className="text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal">
               About
             </a>
-            <a href="#contact" className="text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal">
+            <a href={`${anchorPrefix}#contact`} className="text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal">
               Contact
             </a>
             <button className="bg-primary-900 text-text-inverse px-5 py-2 rounded-token-full text-sm font-medium hover:bg-primary-800 transition-colors duration-token-normal">
@@ -67,16 +71,16 @@ export default function Header() {
           isMenuOpen ? 'max-h-64 opacity-100 mt-4 pb-4' : 'max-h-0 opacity-0'
         }`}>
           <div className="space-y-3">
-            <a href="#features" className="block text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal" onClick={() => setIsMenuOpen(false)}>
-              Features
+            <a href={`${anchorPrefix}#services`} className="block text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal" onClick={() => setIsMenuOpen(false)}>
+              Services
             </a>
-            <a href="#case-studies" className="block text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal" onClick={() => setIsMenuOpen(false)}>
+            <a href={`${anchorPrefix}#case-studies`} className="block text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal" onClick={() => setIsMenuOpen(false)}>
               Case Studies
             </a>
-            <a href="#about" className="block text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal" onClick={() => setIsMenuOpen(false)}>
+            <a href={`${anchorPrefix}#about`} className="block text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal" onClick={() => setIsMenuOpen(false)}>
               About
             </a>
-            <a href="#contact" className="block text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal" onClick={() => setIsMenuOpen(false)}>
+            <a href={`${anchorPrefix}#contact`} className="block text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal" onClick={() => setIsMenuOpen(false)}>
               Contact
             </a>
             <button className="w-full bg-primary-900 text-text-inverse px-6 py-2 rounded-token-full text-sm font-medium hover:bg-primary-800 transition-colors duration-token-normal">
