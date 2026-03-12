@@ -3,7 +3,7 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center pt-32 pb-24">
       <div className="container mx-auto px-6 max-w-4xl text-center">
         <div className="animate-fade-in">
-          <h1 className="flex text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light mb-8 animate-slide-up leading-[1.1] tracking-tight text-text-primary">
+          <h1 className="flex text-5xl justify-center sm:text-6xl md:text-7xl lg:text-8xl font-light mb-8 animate-slide-up leading-[1.1] tracking-tight text-text-primary">
             Tapestri Collective
           </h1>
           <p className="text-xl md:text-2xl text-text-secondary mb-12 max-w-2xl mx-auto animate-slide-up animation-delay-200 font-light leading-relaxed">
