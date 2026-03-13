@@ -29,7 +29,7 @@ export default function Header() {
       <nav className="container mx-auto px-6 py-5">
         <div className="flex items-center justify-between">
           <div className="text-lg font-medium text-text-primary">
-            <a href="/" className="text-text-primary hover:text-text-secondary transition-colors duration-token-normal">Tapestri Collective</a>
+            <a href="/" className="text-text-primary hover:text-text-secondary transition-colors duration-token-normal">Tapestri</a>
           </div>
           
           {/* Desktop Navigation */}
