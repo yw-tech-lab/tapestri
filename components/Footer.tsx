@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="bg-background-default border-t border-border-default py-16">
       <div className="container mx-auto px-6 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div>
             <h3 className="text-lg font-medium mb-4 text-text-primary">Tapestri Collective</h3>
             <p className="text-text-secondary text-sm font-light">
@@ -36,9 +36,9 @@ export default function Footer() {
               <li><a href="#contact" className="text-sm text-text-secondary hover:text-text-primary transition-colors duration-token-normal font-light">Contact</a></li>
             </ul>
           </div>
-        </div>
+        </div> */}
         
-        <div className="border-t border-border-default pt-8 text-center">
+        <div className="pt-8 text-center">
           <p className="text-sm text-text-secondary font-light">&copy; {new Date().getFullYear()} Tapestri Collective. All rights reserved.</p>
         </div>
       </div>

@@ -12,8 +12,8 @@ export default function Home() {
       <ScrollProgress />
       <Header />
       <Hero />
-      <Features />
-      <CaseStudies />
+      {/* <Features />
+      <CaseStudies /> */}
       <About />
       <Footer />
     </main>
